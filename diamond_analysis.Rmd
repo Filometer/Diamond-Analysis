@@ -1,0 +1,65 @@
+---
+title: "Diamond Analysis Project"
+author: "Amoo Samuel"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    number_sections: true
+    theme: cerulean
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+data("diamonds")
+```
+
+## Introduction 
+This project explores the diamonds dataset available in the ggplot2 package. The aim is to uncover insights about how various diamond attributes — such as carat, cut, color, and clarity — influence the price.
+
+## Dataset Summary
+I start by examining a summary of the diamonds dataset to get a sense of its structure, variable types, and basic statistics.
+
+## Price Distribution
+I examine the distribution of diamond prices to understand pricing trends and outliers.
+
+```{r Price Distribution}
+ggplot(diamonds, aes(x = price)) +
+  geom_histogram(fill = "steelblue", color = "black", bins = 50) +
+  labs(title = "Histogram of Diamond Prices", x = "Price", y = "Count")
+```
+
+## Carat vs Price by Cut
+This plot visualizes how carat affects price, and how this relationship varies across different cut qualities.
+
+```{r Catat vs Price by Cut}
+ggplot(data = diamonds, aes(x = carat, y = price, color = cut)) +
+  geom_point(alpha = 0.4) +
+  facet_wrap(~cut) +
+  labs(title = "Carat vs Price Faceted by Cut",
+       x = "Carat",
+       y = "Price") +
+  theme_minimal()
+```
+
+## Price by Cut
+A boxplot helps compare the price distributions across different cut categories.
+
+```{r Price by Cut}
+ggplot(diamonds, aes(x = cut, y = price, fill = cut)) +
+  geom_boxplot() +
+  labs(title = "Price Distribution by Cut", x = "Cut", y = "Price") +
+  theme_minimal()
+```
+
+
+## Conclusion 
+
+- Diamond price increases with carat size, as expected.
+
+- Cut quality influences the price significantly.
+
+- There are clear differences in pricing across cut categories, visible in both the scatter and box plots.
+
+This analysis provides useful insights for buyers, sellers, or anyone interested in understanding what drives diamond pricing.
+
